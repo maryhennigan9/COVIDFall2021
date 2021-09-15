@@ -31,8 +31,12 @@ library(formattable)
 #Import .csv Aug 07 - Sept 11 from Github
 ```{r}
 hospitalage_master <- rio::import("https://raw.githubusercontent.com/maryhennigan9/COVIDFall2021/main/hospitalage.csv")
-```
 
+
+#hospitalage_master is missing these dates: 
+#August 12, 13, 23, 24, 25, 26, 27, 28, 29
+#September 2, 4, 5, 6, 9, 12, 13, 14 
+```
 
 
 #Below is creating the base timeseries from files on Hennigan's computer#
