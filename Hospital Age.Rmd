@@ -1,0 +1,111 @@
+---
+title: "Hosptial Age Timeseries"
+author: "Mary Hennigan"
+date: "9/14/2021"
+output: .csv file
+---
+
+```{r include=FALSE}
+#install.packages("slider")
+#install.packages("zoo")
+#install.packages("gtools")
+# vignette("basic-usage", package="googlesheets")
+#install.packages("googledrive")
+#install.packages("googlesheets4")
+#install.packages("kableExtra")
+#install.packages("formattable")
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(googlesheets4)
+library(googledrive)
+library(tidyr)
+library(jsonlite)
+library(gtools)
+library(zoo)  
+library(reshape2)
+library(slider)
+library(formattable)
+```
+
+
+-**Import Data for Timeseries**
+```{r}
+aug7 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-08-07.csv")
+aug8 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-08-08.csv")
+aug9 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-08-09.csv")
+aug10 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-08-10.csv")
+aug11 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-08-11.csv")
+aug14 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-08-14.csv")
+aug15 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-08-15.csv")
+aug16 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-08-16.csv")
+aug17 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-08-17.csv")
+aug18 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-08-18.csv")
+aug19 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-08-19.csv")
+aug20 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-08-20.csv")
+aug21 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-08-21.csv")
+aug30 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-08-30.csv")
+aug31 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-08-31.csv")
+sep1 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-09-01.csv")
+sep3 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-09-03.csv")
+sep7 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-09-07.csv")
+sep8 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-09-08.csv")
+sep10 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-09-10.csv")
+sep11 <- rio::import("/Users/maryhennigan/Downloads/ArkansasCovidFall2021/Hospital Age/hospital_age_2021-09-11.csv")
+```
+
+#Clean and normalize names
+```{r}
+aug7 <- clean_names(aug7)
+aug8 <- clean_names(aug8)
+aug9 <- clean_names(aug9)
+aug10 <- clean_names(aug10)
+aug11 <- clean_names(aug11)
+aug14 <- clean_names(aug14)
+aug15 <- clean_names(aug15)
+aug16 <- clean_names(aug16)
+aug17 <- clean_names(aug17)
+aug18 <- clean_names(aug18)
+aug19 <- clean_names(aug19)
+aug20 <- clean_names(aug20)
+aug21 <- clean_names(aug21)
+aug30 <- clean_names(aug30)
+aug31 <- clean_names(aug31)
+sep1 <- clean_names(sep1)
+sep3 <- clean_names(sep3)
+sep7 <- clean_names(sep7)
+sep8 <- clean_names(sep8)
+sep10 <- clean_names(sep10)
+sep11 <- clean_names(sep11)
+```
+
+
+#Combine .csvs
+```{r}
+hospitalage <- smartbind(aug7,
+                         aug8, 
+                         aug9, 
+                         aug10,
+                         aug11,
+                         aug14, 
+                         aug15,
+                         aug16, 
+                         aug17, 
+                         aug18,
+                         aug19, 
+                         aug20, 
+                         aug21,
+                         aug30,
+                         aug31, 
+                         sep1, 
+                         sep3, 
+                         sep7, 
+                         sep8,
+                         sep10, 
+                         sep11)
+glimpse(hospitalage)
+write.csv(hospitalage, "hospitalage.csv")
+```
+
+
+
