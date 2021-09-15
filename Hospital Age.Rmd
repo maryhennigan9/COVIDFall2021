@@ -28,6 +28,14 @@ library(slider)
 library(formattable)
 ```
 
+#Import .csv Aug 07 - Sept 11 from Github
+```{r}
+hospitalage_master <- rio::import("https://raw.githubusercontent.com/maryhennigan9/COVIDFall2021/main/hospitalage.csv")
+```
+
+
+
+#Below is creating the base timeseries from files on Hennigan's computer#
 
 -**Import Data for Timeseries**
 ```{r}
